@@ -14,7 +14,10 @@ dc.onmessage = e => {
     console.log("Message: " + e.data);
     appendDiv(e.data);
 }
-dc.onopen = e => console.log("CONNECTED!!!");
+dc.onopen = e => {
+    console.log("CONNECTED!!!");
+    connEstablished();
+}
 
 rc.ondatachannel = e => {
     rc.dc = e.channel;
@@ -22,7 +25,10 @@ rc.ondatachannel = e => {
         console.log("Message: " + e.data);
         appendDiv(e.data);
     }
-    rc.dc.onopen = e => console.log("Connection Openend!!!!!!")
+    rc.dc.onopen = e => {
+        console.log("Connection Openend!!!!!!")
+        connEstablished();
+    }
 }
 
 // const texts = {
@@ -30,9 +36,9 @@ rc.ondatachannel = e => {
 //     text,
 // }
 function handleCreate() {
-
+    let SDPstring;
     lc.onicecandidate = e => {
-        let SDPstring = JSON.stringify(lc.localDescription);
+        SDPstring = JSON.stringify(lc.localDescription);
         console.log("Ice candidate found! Reprinting SDP " + SDPstring);
         navigator.clipboard.writeText(SDPstring);
     }
@@ -66,7 +72,7 @@ function handleJoin() {
 
 function handleSend1() {
     let newText = document.getElementById('msg1').value;
-    dc.send(newText)
+    dc.send(newText);
 }
 function handleSend2() {
     let newText = document.getElementById('msg2').value;
@@ -80,12 +86,31 @@ function appendDiv(textReceived) {
     childElement.textContent = textReceived;
     document.getElementById('texts').appendChild(childElement);
 }
-// let d2Text = '';
-// function handleClick1() {
-//     let newText = document.createTextNode("  HEllo ");
-//     let newText = document.getElementById('i1').value;
-//     d1Text = d1Text + newText + '\n';
-//     console.log(d1Text);
 
-//     document.getElementById('d1').innerHTML = d1Text;
+function connEstablished() {
+    const container = document.getElementById('container')
+    const createButton = document.getElementById('createButton');
+    const sendAnswerButton = document.getElementById('sendAnswerButton');
+    const answer = document.getElementById('answer');
+    const join = document.getElementById('join');
+    const joinButton = document.getElementById('joinButton');
+    const brhide = document.getElementById('br-hide');
+    container.removeChild(createButton)
+    container.removeChild(sendAnswerButton)
+    container.removeChild(answer)
+    container.removeChild(join)
+    container.removeChild(joinButton)
+    container.removeChild(brhide)
+
+    document.getElementById('connectionStatus').innerText = 'CONNECTED'
+
+}
+
+//Hide the other send button
+
+// function connEstablishedOffer() {
+//     window.location.href = 'textingPageOffer.html';
 // }
+// function connEstablishedAnswer() {
+//     window.location.href = 'textingPageAnswer.html';
+
