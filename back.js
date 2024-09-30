@@ -1,3 +1,5 @@
+//Define and create Peer Connections
+
 const configuration = {
     iceServers: [
         { urls: 'stun:stun.l.google.com:19302' }, // Google STUN server
@@ -9,6 +11,9 @@ const configuration = {
 
 const lc = new RTCPeerConnection(configuration);
 const rc = new RTCPeerConnection(configuration);
+
+//Add data channels, and hopefully media streams as well
+
 const dc = lc.createDataChannel("channel");
 dc.onmessage = e => {
     console.log("Message: " + e.data);
@@ -38,7 +43,10 @@ rc.ondatachannel = e => {
 // const texts = {
 //     user,
 //     text,
-// }
+// } //This is the format of the texts when stored in db, for now mwh who cares
+
+//Create offer 
+
 function handleCreate() {
     let SDPstring;
     lc.onicecandidate = e => {
@@ -51,10 +59,15 @@ function handleCreate() {
 
 }
 
+// Accept the answer SDP from peer 2
+
 function handleAnswer() {
     const answer = JSON.parse(document.getElementById('answer').value);
     lc.setRemoteDescription(answer);
 }
+
+// Accept offer SDP and send answer SDP
+
 function handleJoin() {
     const offer = JSON.parse(document.getElementById('join').value);
 
@@ -68,6 +81,7 @@ function handleJoin() {
 
 }
 
+//Send text from peer 1
 
 function handleSend1() {
     let newText = document.getElementById('msg1').value;
@@ -75,6 +89,9 @@ function handleSend1() {
     newText = 'Sent: ' + newText
     appendDiv(newText);
 }
+
+//Send text from peer 2
+
 function handleSend2() {
     let newText = document.getElementById('msg2').value;
     rc.dc.send(newText);
@@ -82,13 +99,16 @@ function handleSend2() {
     appendDiv(newText);
 }
 
-let d1Text = '';
+//Maintain a history of the messages, both sent and received
+
 let textReceived;
 function appendDiv(textReceived) {
     const childElement = document.createElement('div')
     childElement.textContent = textReceived;
     document.getElementById('texts').appendChild(childElement);
 }
+
+//Clear the cluster of joining and creating the chatroom
 
 function connEstablished() {
     const container = document.getElementById('container')

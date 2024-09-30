@@ -1,4 +1,4 @@
-# webrtc
+# WebRTC Application
 
 Practice for learning webrtc
 
@@ -12,5 +12,4 @@ Process to use the file
 6. Then paste the answer SDP (which again automatically copies to clipboard) in the send answer input
 7. It is connected now (hopefully!)
 
-Now you can send text from one side to other.
-The side that created the offer needs to send from 1, and the side that joined needs to send from 2.
+Now you can send text from one side to other. A history is shown of the sent and received messages.
