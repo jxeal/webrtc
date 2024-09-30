@@ -12,22 +12,26 @@ const rc = new RTCPeerConnection(configuration);
 const dc = lc.createDataChannel("channel");
 dc.onmessage = e => {
     console.log("Message: " + e.data);
-    appendDiv(e.data);
+    const recvText = 'Received: ' + e.data;
+    appendDiv(recvText);
 }
 dc.onopen = e => {
     console.log("CONNECTED!!!");
     connEstablished();
+    connEstablishedOffer()
 }
 
 rc.ondatachannel = e => {
     rc.dc = e.channel;
     rc.dc.onmessage = e => {
         console.log("Message: " + e.data);
-        appendDiv(e.data);
+        const recvText = 'Received: ' + e.data;
+        appendDiv(recvText);
     }
     rc.dc.onopen = e => {
         console.log("Connection Openend!!!!!!")
         connEstablished();
+        connEstablishedAnswer()
     }
 }
 
@@ -49,13 +53,10 @@ function handleCreate() {
 
 function handleAnswer() {
     const answer = JSON.parse(document.getElementById('answer').value);
-    // console.log(answer);
     lc.setRemoteDescription(answer);
 }
 function handleJoin() {
     const offer = JSON.parse(document.getElementById('join').value);
-
-    // console.log(offer)
 
     rc.onicecandidate = e => {
         let SDPstring = JSON.stringify(rc.localDescription);
@@ -67,16 +68,18 @@ function handleJoin() {
 
 }
 
-// function handleJoin2() {
-// }
 
 function handleSend1() {
     let newText = document.getElementById('msg1').value;
     dc.send(newText);
+    newText = 'Sent: ' + newText
+    appendDiv(newText);
 }
 function handleSend2() {
     let newText = document.getElementById('msg2').value;
     rc.dc.send(newText);
+    newText = 'Sent: ' + newText
+    appendDiv(newText);
 }
 
 let d1Text = '';
@@ -94,23 +97,32 @@ function connEstablished() {
     const answer = document.getElementById('answer');
     const join = document.getElementById('join');
     const joinButton = document.getElementById('joinButton');
-    const brhide = document.getElementById('br-hide');
     container.removeChild(createButton)
     container.removeChild(sendAnswerButton)
     container.removeChild(answer)
     container.removeChild(join)
     container.removeChild(joinButton)
-    container.removeChild(brhide)
 
     document.getElementById('connectionStatus').innerText = 'CONNECTED'
 
+    const textcontainer = document.getElementById('textcontainer');
+    textcontainer.style.display = 'block'
 }
 
 //Hide the other send button
 
-// function connEstablishedOffer() {
-//     window.location.href = 'textingPageOffer.html';
-// }
-// function connEstablishedAnswer() {
-//     window.location.href = 'textingPageAnswer.html';
+function connEstablishedOffer() {
+    const container = document.getElementById('textcontainer')
+    const msgSend = document.getElementById('msgSend2');
+    const msg = document.getElementById('msg2');
+    container.removeChild(msgSend)
+    container.removeChild(msg)
+}
+function connEstablishedAnswer() {
+    const container = document.getElementById('textcontainer')
+    const msgSend = document.getElementById('msgSend1');
+    const msg = document.getElementById('msg1');
+    container.removeChild(msgSend)
+    container.removeChild(msg)
 
+}
