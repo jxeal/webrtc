@@ -12,4 +12,4 @@ Process to use the file
 6. Then paste the answer SDP (which again automatically copies to clipboard) in the send answer input
 7. It is connected now (hopefully!)
 
-Now you can send text from one side to other, and a history is shown of the sent and received messages.
+Now you can send text from one side to other. A history is shown of the sent and received messages.
