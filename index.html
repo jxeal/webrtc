@@ -7,26 +7,22 @@
     <script src="back.js"></script>
 </head>
 <body>
-    <!-- <div id="d1">Empty</div>
-    <br>
-    <input type="text" name="" id="i1">
-    <button onclick="handleClick1()">Send</button> -->
-    <br>
     <div id="container">
         <h1 id="connectionStatus"></h1>
         <button onclick="handleCreate()" id="createButton">Create</button>
         <input type="text" name="" id="answer">
         <button onclick="handleAnswer()" id="sendAnswerButton">Send Answer</button>
-        <br id="br-hide"><br id="br-hide">
+        <br><br>
         <input type="text" name="" id="join">
         <button onclick="handleJoin()" id="joinButton">Join</button>
         <br><br>
-        <input type="text" id="msg1">
-        <button onclick="handleSend1()" id="msgSend1">Send 1</button>
-        <br><br>
-        <input type="text" id="msg2">
-        <button onclick="handleSend2()" id="msgSend2">Send 2</button>
-        <div id="texts"></div>
+        <div id="textcontainer" style="display: none;">
+            <input type="text" id="msg1">
+            <button onclick="handleSend1()" id="msgSend1">Send </button>
+            <input type="text" id="msg2">
+            <button onclick="handleSend2()" id="msgSend2">Send </button>
+            <div id="texts"></div>
+        </div>
     </div>
     
 </body>
