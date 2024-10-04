@@ -1,0 +1,53 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.video-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* space between rows */
+    /* margin: 0 30px; */
+}
+
+/* .video-row video {
+    margin: 0 10px; space between videos
+} */
+
+.button {
+    margin: 10px 0; /* space between button and input */
+    padding: 10px 20px;
+}
+
+.input-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-row input {
+    margin-right: 10px; /* space between input and button */
+    padding: 10px;
+}
+
+.video-wrapper {
+    width: 512px; /* Match the video width */
+    height: 384px; /* Match the video height */
+    background-color: black; /* Set background color */
+    overflow: hidden; /* Hide overflow in case video goes beyond bounds */
+    margin: 0 10px;
+}
