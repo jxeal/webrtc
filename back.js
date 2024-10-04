@@ -6,6 +6,12 @@ const configuration = {
         { urls: 'stun:stun1.l.google.com:19302' }, // Another Google STUN server
         { urls: 'stun:stun2.l.google.com:19302' }, // Another Google STUN server
         { urls: 'stun:stun3.l.google.com:19302' }  // Another Google STUN server
+        // {
+        //     urls: 'relay1.expressturn.com:3478',
+        //     username: 'efAXFS4S8LBS9DKLK9',
+        //     credential: 'U4HsIaq3dmvNH67K'
+        // }
+        //TURN Server not working. Will have to look at that??!!
     ]
 };
 

@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatApp</title>
-    <script src="back.js"></script>
+    <title>Centered Layout</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="server.js"></script>
 </head>
 <body>
-    <div id="container">
-        <h1 id="connectionStatus"></h1>
-        <button onclick="handleCreate()" id="createButton">Create</button>
-        <input type="text" name="" id="answer">
-        <button onclick="handleAnswer()" id="sendAnswerButton">Send Answer</button>
-        <br><br>
-        <input type="text" name="" id="join">
-        <button onclick="handleJoin()" id="joinButton">Join</button>
-        <br><br>
-        <div id="textcontainer" style="display: none;">
-            <input type="text" id="msg1">
-            <button onclick="handleSend1()" id="msgSend1">Send </button>
-            <input type="text" id="msg2">
-            <button onclick="handleSend2()" id="msgSend2">Send </button>
-            <div id="texts"></div>
+    <div class="container">
+        <div class="video-row">
+            <div class="video-wrapper">
+                <video width="512" height="384" id="localVideo" autoplay muted>
+                </video>
+            </div>
+            
+            <div class="video-wrapper">
+                <video width="512" height="384" 
+                id="remoteVideo" autoplay>
+                </video>
+            </div>
+        </div>
+        <button class="button" onclick="handleCameraClick()">Camera On/Off</button>
+        <!-- Make this optional. So make this either a create offer/ join button based on whether the input field is empty -->
+        <div class="input-row">
+            <input type="text" placeholder="Answer" id="answer" >
+            <button class="button" onclick="handleOfferClick()" >Create Offer</button>
+        </div>
+        <div class="input-row">
+            <input type="text" placeholder="Offer" id="join" >
+            <button class="button" onclick="handleJoin()">Join</button>
         </div>
     </div>
-    
 </body>
 </html>
