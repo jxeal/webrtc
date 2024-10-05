@@ -18,14 +18,7 @@ let localStream = null;
 let remoteStream = null;
 
 let videoCameraFlag = 0;
-async function playVideoFromCamera() {
-    if (videoCameraFlag === 1) {
-        const videoTracks = localStream.getVideoTracks();
-        if (videoTracks.length > 0) {
-            videoTracks[0].enabled = true; // Enable the track
-        }
-        return; // Exit the function
-    }
+async function startCamera() {
     try {
         const constraints = {
             'video':
@@ -58,19 +51,17 @@ async function playVideoFromCamera() {
 }
 
 function toggleVideoFromCamera() {
-    // const videoElement = document.querySelector('video#localVideo');
-    // videoElement.srcObject.getTracks().forEach(tracks => tracks.stop());
-    // videoElement.srcObject = null;
+    const videoElement = document.querySelector('video#localVideo');
     const videoTracks = localStream.getVideoTracks();
     if (videoTracks.length > 0) {
         videoTracks[0].enabled = !videoTracks[0].enabled; // Disable the track instead of stopping it
+        videoElement.srcObject = (videoElement.srcObject == null) ? localStream : null;
     }
-    videoCameraFlag = 0;
 }
 
 function handleCameraClick() {
-    if (videoCameraFlag) toggleVideoFromCamera();
-    else playVideoFromCamera();
+    if (!videoCameraFlag) startCamera(); //Start the camera 
+    else toggleVideoFromCamera(); //Toggle the Camera on/off
 }
 
 //Flag for create offer and handle the create offer button click
