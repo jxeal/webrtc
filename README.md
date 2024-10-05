@@ -15,5 +15,3 @@ Process to use the file
 9. It is connected now (hopefully!)
 
 Now you can have a video call from one peer to other.
-
-Note:- For some reason the stream breaks when someone turns their camera off.
